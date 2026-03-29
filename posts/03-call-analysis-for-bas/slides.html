@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>I Built a Personal AI Agent to Finally Start Writing | AI girl Anastasia</title>
+<title>The AI Agent That Made Me Finally Start | AI girl Anastasia</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -250,9 +250,9 @@
   .compare-box.after  .compare-label { color: #27ae60; }
   .compare-box p { font-size: 19px; margin-bottom: 0; max-width: unset; }
   .big-num {
-    font-size: 32px;
+    font-size: 48px;
     font-weight: 900;
-    letter-spacing: -1px;
+    letter-spacing: -2px;
     margin-top: 16px;
     line-height: 1;
   }
@@ -403,22 +403,22 @@
     <div class="split">
       <div class="split-left">
         <div class="label">Episode 01 · March 2026</div>
-        <h1>I Built a Personal AI Agent to Finally Start Writing.</h1>
-        <p>How a Claude Code skill turned 6 months of "I should" into actual weekly content.</p>
+        <h1>The AI Agent That Made Me Finally Start Writing.</h1>
+        <p>How I built a personal AI agent with Claude Code — and what it means for Business Analysts.</p>
         <span class="btn">AI girl Anastasia</span>
       </div>
       <div class="split-right">
         <div class="stat-block">
-          <div class="stat-num">6 mo</div>
-          <div class="stat-label">of saying "I should start"</div>
+          <div class="stat-num">11</div>
+          <div class="stat-label">meeting transcripts analysed</div>
         </div>
         <div class="stat-block">
-          <div class="stat-num">3 files</div>
-          <div class="stat-label">generated in one session</div>
+          <div class="stat-num">8 min</div>
+          <div class="stat-label">instead of 3 hours</div>
         </div>
         <div class="stat-block">
-          <div class="stat-num">1 cmd</div>
-          <div class="stat-label">/weekly-content</div>
+          <div class="stat-num">0</div>
+          <div class="stat-label">lines of code written</div>
         </div>
         <div class="byline">AI in Business Analysis · weekly</div>
       </div>
@@ -433,51 +433,54 @@
       <div class="label">The problem</div>
       <h2>Sound familiar?</h2>
       <ul>
-        <li>You keep saying "I should share what I'm learning" — but never actually start</li>
-        <li>Creating 3 content formats every week (post + slides + script) feels like too much work</li>
-        <li>AI-generated content doesn't sound like you — <span class="hl-pink">it's generic</span></li>
+        <li>You review the same kind of meeting notes every week — manually</li>
+        <li>Preparing a status update takes longer than the actual work</li>
+        <li>You think AI could help but <span class="hl-pink">"that's for developers"</span></li>
       </ul>
-      <p style="margin-top: 28px;" class="muted">I had all three problems at once. Then I built an agent for it.</p>
+      <p style="margin-top: 28px;" class="muted">I said that last one for two years. Then I tried Claude Code.</p>
       <div class="slide-num">02 / 08</div>
     </div>
   </div>
 
-  <!-- SLIDE 3 · The concept -->
+  <!-- SLIDE 3 · What is Claude Code -->
   <div class="slide">
     <div class="slide-inner">
       <div class="pill cyan"></div>
-      <div class="label">The concept</div>
-      <h2>What is a <span class="hl-green">Claude Code Skill?</span></h2>
-      <p class="large-p">A reusable instruction file that Claude reads before generating anything — so it already knows your voice, your audience, and what you need.</p>
-      <p class="muted">Think of it like a briefing document. You write it once. Every time you run the skill, Claude is already briefed.</p>
+      <div class="label">The tool</div>
+      <h2>What is <span class="hl-green">Claude Code?</span></h2>
+      <p class="large-p">A terminal-based AI agent that reads your files, runs tasks, and saves results — in plain English.</p>
+      <pre>npm install -g @anthropic/claude-code
+cd your-project
+claude</pre>
+      <p class="muted">No coding required. If you can write a clear email, you can use this.</p>
       <div class="slide-num">03 / 08</div>
     </div>
   </div>
 
-  <!-- SLIDE 4 · How it works -->
+  <!-- SLIDE 4 · Framework -->
   <div class="slide">
     <div class="slide-inner">
       <div class="pill"></div>
-      <div class="label">The skill structure</div>
-      <h2>Three sections.<br>That's the whole skill.</h2>
+      <div class="label">The framework</div>
+      <h2>Every prompt has<br>the same structure.</h2>
       <div class="framework">
         <div class="fw-card">
-          <div class="fw-label">Section 1</div>
-          <h3>Persona</h3>
-          <p>Who you are, your voice, your audience — loaded every run</p>
+          <div class="fw-label">Take</div>
+          <h3>What data?</h3>
+          <p>Files, folders, text, a URL</p>
         </div>
         <div class="fw-card">
-          <div class="fw-label">Section 2</div>
-          <h3>Before you start</h3>
-          <p>Asks 4 questions first — topic, number, story, what to avoid</p>
+          <div class="fw-label">Process</div>
+          <h3>What to do?</h3>
+          <p>Find, classify, summarise, compare</p>
         </div>
         <div class="fw-card">
-          <div class="fw-label">Section 3</div>
-          <h3>Output</h3>
-          <p>3 files saved to the right folders, named correctly, every time</p>
+          <div class="fw-label">Store</div>
+          <h3>Where to save?</h3>
+          <p>A file, a report, a folder</p>
         </div>
       </div>
-      <p class="muted">No guessing. No generic output. It asks before it writes.</p>
+      <p class="muted">This is the same thinking BAs already do. The agent just executes it.</p>
       <div class="slide-num">04 / 08</div>
     </div>
   </div>
@@ -486,18 +489,14 @@
   <div class="slide">
     <div class="slide-inner">
       <div class="pill pink"></div>
-      <div class="label">Running it</div>
-      <h2>One command. Three files.</h2>
-      <pre># Open terminal in your project folder
-claude
-
-# Type the skill name
-❯ /weekly-content
-
-# Claude asks 4 questions, then saves:
-posts/01-your-topic/linkedin.md
-posts/01-your-topic/slides.html
-posts/01-your-topic/speaker-notes.md</pre>
+      <div class="label">Real example</div>
+      <h2>My call analysis prompt.</h2>
+      <pre>In the calls/ folder are 11 meeting transcripts.
+Read all of them. Find repeating problems.
+For each: what it is, who raised it, impact.
+Save a structured report to report.md.</pre>
+      <p>I turned this into a reusable Skill — one command, every time:</p>
+      <code>/call-analysis</code>
       <div class="slide-num">05 / 08</div>
     </div>
   </div>
@@ -511,16 +510,16 @@ posts/01-your-topic/speaker-notes.md</pre>
       <div class="compare">
         <div class="compare-box before">
           <div class="compare-label">Before</div>
-          <p>0 posts. Every Sunday: "I'll start next week."</p>
-          <div class="big-num">6 mo</div>
+          <p>Read 11 transcripts manually, take notes, find patterns, format a report.</p>
+          <div class="big-num">~3 hrs</div>
         </div>
         <div class="compare-box after">
           <div class="compare-label">After</div>
-          <p>Answer 4 questions. Review 3 files. Adjust 10–20%. Done.</p>
-          <div class="big-num">1 session</div>
+          <p>Type <code>/call-analysis</code> in the terminal. Review the output.</p>
+          <div class="big-num">~8 min</div>
         </div>
       </div>
-      <p class="muted">The ideas are still mine. The blank page problem is gone.</p>
+      <p class="muted">The thinking is still mine. The reading and formatting is the agent's.</p>
       <div class="slide-num">06 / 08</div>
     </div>
   </div>
@@ -530,11 +529,11 @@ posts/01-your-topic/speaker-notes.md</pre>
     <div class="slide-inner">
       <div class="pill cyan"></div>
       <div class="label">Get started today</div>
-      <h2>3 steps to set it up.</h2>
+      <h2>3 steps to try this.</h2>
       <ol class="steps">
-        <li>Copy the <code>agents/weekly-content/</code> folder into <code>.claude/skills/</code> in your project</li>
-        <li>Restart Claude Code — the skill is now available</li>
-        <li>Type <code>/weekly-content</code>, answer 4 questions, review the 3 files</li>
+        <li>Install Claude Code: <code>npm install -g @anthropic/claude-code</code></li>
+        <li>Copy any skill folder from GitHub into <code>.claude/skills/</code> in your project</li>
+        <li>Restart Claude Code, type <code>/call-analysis</code> and press Enter</li>
       </ol>
       <div class="slide-num">07 / 08</div>
     </div>
@@ -545,11 +544,11 @@ posts/01-your-topic/speaker-notes.md</pre>
     <div class="slide-inner">
       <div class="pill"></div>
       <div class="label">Try it yourself</div>
-      <h2>The skill is free<br>to copy and use.</h2>
+      <h2>All skills are free<br>to copy and use.</h2>
       <div class="big-link">github.com/AIgirlAnastasia/ai-in-business-analysis</div>
       <ul style="margin-top: 36px;">
-        <li>Star the repo — more skills added regularly</li>
-        <li>Fork it and adapt to your own voice and workflow</li>
+        <li>Star the repo — new skills added regularly</li>
+        <li>Fork it and adapt to your own work</li>
         <li>Share what you built — tag me on LinkedIn</li>
       </ul>
       <div class="byline">AI girl Anastasia · AI in Business Analysis</div>

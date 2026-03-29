@@ -1,53 +1,49 @@
-# Speaker Notes — Episode 01
-
-*What to say on each slide. Conversational, not scripted.*
+# Speaker Notes — Post 01: I Built an AI Agent to Stop Procrastinating
 
 ---
 
 ## Slide 1 — Title
 
-"Hi, I'm Anastasia. I'm a Business Analyst, and for months I kept telling myself: I should start sharing what I'm learning about AI. And then, ironically, an AI agent actually helped me finally do it. Today I want to show you exactly what that looks like — and how you can do the same thing."
+Hi, I'm Anastasia. I'm a Business Analyst, and for about 6 months I was saying "I really should start writing about AI." Just saying it, not doing it. And last week an AI Agent finally made me stop talking and actually publish something. Today I want to show you exactly what I built and how it works — because if you've been procrastinating on something similar, this might help you too.
 
 ---
 
-## Slide 2 — Sound familiar?
+## Slide 2 — The Problem
 
-"Let me ask you something. How much of your week is spent reading the same types of documents? Reviewing the same meeting notes? Preparing the same kind of status update? I was doing this for years and I always thought — AI can probably help with this, but I'm not a developer. I don't code. That's not for me. If you've ever thought that, this video is for you."
-
----
-
-## Slide 3 — What is Claude Code?
-
-"Claude Code is a tool that runs in your terminal — which sounds scary, but it's basically a chat window for your files. You type instructions in plain English, and it reads your documents, processes them, and saves results. The install is literally two commands. You don't write any code. You just describe what you want."
+So here's what was stopping me. It wasn't a lack of ideas. It was the format problem. Every week I wanted to post on LinkedIn, create slides for YouTube, AND write a script for recording — and doing all three from scratch every single week felt like too much. On top of that, whenever I tried using AI to help, the output just didn't sound like me. It was too polished, too generic. Not honest enough.
 
 ---
 
-## Slide 4 — The framework
+## Slide 3 — The Concept
 
-"The way I learned to write instructions for the agent follows this simple framework: TAKE, PROCESS, STORE. What are you giving it? What should it do with it? Where should the result go? This is actually the same thinking we do as BAs when we scope any task. We're just doing it for an AI agent now instead of a junior analyst."
-
----
-
-## Slide 5 — Real example
-
-"Here's a real prompt I used. I had 11 meeting transcripts — weekly syncs over three months. I asked the agent to read all of them, find repeating problems, and save a structured report. That's it. You can see the full prompt on screen. I then turned this into a Skill — which is like a saved command. So now I just type slash call-analysis and it does the whole thing."
+So what I built is called a Claude Code Skill. Think of it like a briefing document you write once — and every time the agent runs, it already knows who you are before it does anything. It knows your voice, your audience, your tone. Instead of explaining yourself from scratch every week, you just describe your topic and share your story. The persona stays consistent automatically.
 
 ---
 
-## Slide 6 — Before / After
+## Slide 4 — How It Works
 
-"Before: I would manually read through transcripts, take notes in a separate doc, try to find patterns, then format everything. On a good day that's two hours. On a bad day it's three. After: I type one command, wait about a minute, and I get a structured report with decisions, open questions, problems, and action items. The thinking is still mine — I review and edit the output. But the reading, organizing, and formatting is done."
+The skill has three sections. The first is the Persona — it describes who I am, how I write, and who reads my content. That loads before any generation happens. The second section is "Before you start" — and this is important — before Claude writes anything, it asks me four questions. What's the topic, what number is this post, do I have a real story to share, and is there anything to avoid. That last question matters a lot, because it keeps the output specific, not generic. The third section is the Output — it defines exactly what to generate and where to save it.
 
 ---
 
-## Slide 7 — How to start
+## Slide 5 — Running It
 
-"So here's exactly how to try this today. First, install Claude Code — it's one npm command, I'll link the full guide in the description. Second, copy any skill from my GitHub repo into your project folder. And third, just run it. Navigate arrows on your keyboard work to move between slides, by the way."
+Here's what actually running it looks like. I open my terminal in my project folder — I named it "AI girl Anastasia," which sounds a bit funny but honestly it makes me feel like I'm building something real. I run Claude Code, and I type `/weekly-content`. That's it. Claude reads the skill, asks me the 4 questions, and then generates three files — the LinkedIn post, the slides you're looking at right now, and the speaker notes I'm reading from. All saved to the right place automatically.
+
+---
+
+## Slide 6 — Before vs After
+
+Before I had this: zero posts published, a lot of vague plans, and a pattern of "I'll start next week." After: I answer four questions, get three files, adjust maybe 10 to 20 percent, commit, push, done. The key shift isn't that AI does the work for me — I still review and edit everything. The key shift is that the hardest part, starting from a blank page, is gone.
+
+---
+
+## Slide 7 — How to Set It Up
+
+If you want to try this yourself, it takes about 5 minutes to set up. You copy the skill folder into your Claude project, restart Claude Code, and the `/weekly-content` command is available. Then you just run it and answer four questions. Everything else is handled. I'll put the full setup guide and the skill files on GitHub — link is on the next slide.
 
 ---
 
 ## Slide 8 — Connect
 
-"Everything I showed today — the skills, the example outputs, the setup instructions — it's all in this GitHub repo, free to use. Fork it, adapt it to your own work, and let me know what you build."
-
----
+That's it for today. The full skill, the folder structure, all the files — everything is on GitHub at AIgirlAnastasia. If you try it, I'd genuinely love to know how it goes. Come find me on LinkedIn or here on YouTube. This is week one for me. Let's see how consistent I can be.

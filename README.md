@@ -38,7 +38,7 @@ The meta-agent. Give it a topic → it generates a LinkedIn post and a YouTube p
 ## How to use these skills
 
 1. Install Claude Code → see [`setup/getting-started.md`](./setup/getting-started.md)
-2. Copy any skill folder into `.claude/skills/` in your project
+2. Copy the `SKILL.md` file from any skill folder into `~/.claude/commands/` on your machine (rename it to `[skill-name].md`)
 3. Restart Claude Code and run `/<skill-name>`
 
 ---

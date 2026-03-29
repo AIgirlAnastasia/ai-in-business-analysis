@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinkedIn Carousel — Post 01 | AI girl Anastasia</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #e8f5e2;
+    --text:    #1a1a1a;
+    --green:   #00c49a;
+    --border:  #1a1a1a;
+    --radius:  28px;
+    --radius-pill: 100px;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body {
+    font-family: 'Montserrat', Arial, sans-serif;
+    background: #c8c8c0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+
+  /* ── Fixed-size canvas, scaled to fit browser ── */
+  .slide-viewport {
+    width: 1080px;
+    height: 1350px;
+    transform-origin: top center;
+    position: relative;
+    margin: 20px 0;
+  }
+
+  .slide {
+    display: none;
+    position: absolute;
+    inset: 0;
+    width: 1080px;
+    height: 1350px;
+    background: var(--bg);
+  }
+  .slide.active { display: flex; }
+
+  /* ── Split layout (cover) ── */
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    height: 100%;
+  }
+  .split-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 80px 80px 100px;
+    border-right: 1.5px solid var(--border);
+  }
+  .split-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 80px 80px 80px;
+    background: var(--green);
+  }
+
+  /* ── Content layout ── */
+  .slide-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 100px;
+    position: relative;
+  }
+
+  /* ── Pill accent ── */
+  .pill {
+    display: inline-block;
+    height: 14px;
+    width: 80px;
+    background: var(--green);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-pill);
+    margin-bottom: 28px;
+  }
+  .pill.white { background: #fff; }
+
+  /* ── Typography ── */
+  .label {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--text);
+    opacity: 0.5;
+    margin-bottom: 20px;
+  }
+  .label-white {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #fff;
+    opacity: 0.7;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-size: 72px;
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 28px;
+  }
+  h2 {
+    font-size: 60px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 40px;
+  }
+  h3 {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+  p {
+    font-size: 44px;
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--text);
+    margin-bottom: 20px;
+    max-width: 880px;
+  }
+  .large-p {
+    font-size: 52px;
+    font-weight: 500;
+    line-height: 1.45;
+    max-width: 880px;
+  }
+  .muted { opacity: 0.55; font-size: 38px; }
+
+  /* ── Highlights ── */
+  .hl-green {
+    background: #00c49a;
+    color: #fff;
+    padding: 2px 16px;
+    border-radius: 8px;
+  }
+  .hl-light {
+    background: #c8f0e0;
+    padding: 2px 16px;
+    border-radius: 8px;
+  }
+
+  /* ── Lists ── */
+  ul { list-style: none; padding: 0; }
+  ul li {
+    font-size: 42px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--text);
+    margin-bottom: 28px;
+    padding-left: 56px;
+    position: relative;
+    max-width: 880px;
+  }
+  ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  /* ── Framework grid ── */
+  .framework {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin: 32px 0;
+  }
+  .fw-card {
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 40px 32px;
+  }
+  .fw-card:nth-child(1) { background: #c8f0e0; }
+  .fw-card:nth-child(2) { background: #d4f5ea; }
+  .fw-card:nth-child(3) { background: #edfff7; }
+  .fw-label {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    opacity: 0.6;
+  }
+  .fw-card h3 { font-size: 34px; margin-bottom: 10px; }
+  .fw-card p  { font-size: 28px; margin: 0; opacity: 0.7; max-width: unset; line-height: 1.4; }
+
+  /* ── Steps list ── */
+  .steps { list-style: none; counter-reset: s; padding: 0; }
+  .steps li {
+    counter-increment: s;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--text);
+    margin-bottom: 36px;
+    padding-left: 80px;
+    position: relative;
+    max-width: 880px;
+  }
+  .steps li::before {
+    content: counter(s);
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 56px;
+    height: 56px;
+    background: var(--text);
+    color: var(--bg);
+    border-radius: 50%;
+    font-size: 24px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── Compare boxes ── */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin: 28px 0;
+  }
+  .compare-box {
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 48px 44px;
+  }
+  .compare-box.before { background: #fde8e8; }
+  .compare-box.after  { background: #c8f0e0; }
+  .compare-label {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .compare-box.before .compare-label { color: #c0392b; }
+  .compare-box.after  .compare-label { color: #27ae60; }
+  .compare-box p { font-size: 36px; margin-bottom: 0; max-width: unset; line-height: 1.45; }
+  .big-num {
+    font-size: 72px;
+    font-weight: 900;
+    letter-spacing: -2px;
+    margin-top: 20px;
+    line-height: 1;
+  }
+  .before .big-num { color: #c0392b; }
+  .after  .big-num { color: #27ae60; }
+
+  /* ── Stat blocks (cover right panel) ── */
+  .stat-block { margin-bottom: 48px; }
+  .stat-block .stat-num {
+    font-size: 96px;
+    font-weight: 800;
+    letter-spacing: -2px;
+    line-height: 1;
+    color: var(--text);
+  }
+  .stat-block .stat-label {
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--text);
+    opacity: 0.65;
+    margin-top: 6px;
+  }
+
+  /* ── Button ── */
+  .btn {
+    display: inline-block;
+    background: var(--text);
+    color: var(--bg);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    padding: 20px 48px;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid var(--border);
+    margin-top: 12px;
+    cursor: default;
+  }
+
+  /* ── Big link ── */
+  .big-link {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--text);
+    border-bottom: 3px solid var(--text);
+    display: inline-block;
+    padding-bottom: 4px;
+    margin-top: 24px;
+    font-family: monospace;
+  }
+
+  /* ── Byline ── */
+  .byline {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text);
+    opacity: 0.5;
+    margin-top: 48px;
+  }
+
+  /* ── Slide number ── */
+  .slide-num {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    opacity: 0.55;
+    letter-spacing: 4px;
+    background: rgba(255,255,255,0.55);
+    padding: 10px 28px;
+    border-radius: 100px;
+    border: 1px solid rgba(26,26,26,0.15);
+  }
+
+  /* ── Command card ── */
+  .cmd-card {
+    display: inline-block;
+    background: var(--text);
+    color: var(--bg);
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: 52px;
+    font-weight: 700;
+    padding: 28px 56px;
+    border-radius: var(--radius);
+    margin: 28px 0;
+    letter-spacing: -1px;
+  }
+
+  /* ── Nav (browser only) ── */
+  .nav {
+    position: fixed;
+    bottom: 24px;
+    right: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 200;
+  }
+  .nav button {
+    background: var(--text);
+    border: none;
+    color: var(--bg);
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    transition: opacity 0.15s;
+  }
+  .nav button:hover { opacity: 0.7; }
+  .counter {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    opacity: 0.5;
+    letter-spacing: 1px;
+  }
+
+  /* ── Print / PDF export ── */
+  @page {
+    size: 1080px 1350px;
+    margin: 0;
+  }
+
+  @media print {
+    body {
+      background: transparent;
+      display: block;
+      min-height: unset;
+      margin: 0;
+    }
+    .nav { display: none !important; }
+    .slide-viewport {
+      transform: none !important;
+      width: 1080px;
+      height: auto;
+      margin: 0;
+      position: static;
+    }
+    .slide {
+      display: flex !important;
+      position: relative !important;
+      width: 1080px;
+      height: 1350px;
+      page-break-after: always;
+      break-after: page;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="slide-viewport">
+
+  <!-- SLIDE 1 · Cover -->
+  <div class="slide active">
+    <div class="split">
+      <div class="split-left">
+        <div class="label">Episode 01 · March 2026</div>
+        <h1>I Built an AI Agent to Finally Start Writing.</h1>
+        <p style="font-size:36px; opacity:0.65; margin-bottom:32px;">6 months of "I should" → 1 cmd that does it</p>
+        <span class="btn">AI girl Anastasia</span>
+      </div>
+      <div class="split-right">
+        <div class="stat-block">
+          <div class="stat-num">6 mo</div>
+          <div class="stat-label">of saying "I should start"</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num">3 files</div>
+          <div class="stat-label">generated in one session</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num">1 cmd</div>
+          <div class="stat-label">/weekly-content</div>
+        </div>
+        <div class="byline" style="color:#1a1a1a;">AI in Business Analysis · weekly</div>
+      </div>
+    </div>
+    <div class="slide-num">01 / 07</div>
+  </div>
+
+  <!-- SLIDE 2 · The problem -->
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="pill"></div>
+      <div class="label">Sound familiar?</div>
+      <h2>We all say it.</h2>
+      <ul>
+        <li>"I should start sharing what I'm learning"</li>
+        <li>Creating a post + slides + script every week feels like too much</li>
+        <li>AI output doesn't sound like <span class="hl-light">you</span> — it's generic</li>
+      </ul>
+      <p class="muted" style="margin-top:20px;">I had all three problems at once.</p>
+      <div class="slide-num">02 / 07</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3 · What I built -->
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="pill"></div>
+      <div class="label">The solution</div>
+      <h2>A personal<br><span class="hl-green">content agent.</span></h2>
+      <ul>
+        <li>Analyses my notes from learning materials</li>
+        <li>Translates Telegram notes — even voice ones</li>
+        <li>Generates post + slides + speaker notes</li>
+      </ul>
+      <p class="muted" style="margin-top:20px;">Built with Claude Code. No coding required.</p>
+      <div class="slide-num">03 / 07</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4 · One command -->
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="pill"></div>
+      <div class="label">How to run it</div>
+      <h2>One command.<br>Three files.</h2>
+      <div class="cmd-card">❯ /weekly-content</div>
+      <ul>
+        <li>linkedin.md — ready to copy-paste</li>
+        <li>slides.html — open and record</li>
+        <li>speaker-notes.md — what to say</li>
+      </ul>
+      <div class="slide-num">04 / 07</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5 · How the skill works -->
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="pill"></div>
+      <div class="label">Inside the skill</div>
+      <h2>Three sections.<br>That's it.</h2>
+      <div class="framework">
+        <div class="fw-card">
+          <div class="fw-label">Section 1</div>
+          <h3>Persona</h3>
+          <p>Your voice, audience, and tone — loaded every run</p>
+        </div>
+        <div class="fw-card">
+          <div class="fw-label">Section 2</div>
+          <h3>Questions</h3>
+          <p>Asks 4 things before writing — no generic output</p>
+        </div>
+        <div class="fw-card">
+          <div class="fw-label">Section 3</div>
+          <h3>Output</h3>
+          <p>3 files saved to the right place automatically</p>
+        </div>
+      </div>
+      <div class="slide-num">05 / 07</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6 · Before / After -->
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="pill"></div>
+      <div class="label">The result</div>
+      <h2>The actual difference.</h2>
+      <div class="compare">
+        <div class="compare-box before">
+          <div class="compare-label">Before</div>
+          <p>0 posts. Every Sunday: "I'll start next week."</p>
+          <div class="big-num">6 mo</div>
+        </div>
+        <div class="compare-box after">
+          <div class="compare-label">After</div>
+          <p>Answer 4 questions. Review 3 files. Done.</p>
+          <div class="big-num">1 sess.</div>
+        </div>
+      </div>
+      <div class="slide-num">06 / 07</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7 · CTA -->
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="pill"></div>
+      <div class="label">Try it yourself</div>
+      <h2>The skill is free<br>to copy and use.</h2>
+      <div class="big-link">github.com/AIgirlAnastasia/ai-in-business-analysis</div>
+      <ul style="margin-top: 52px;">
+        <li>Star the repo — more skills added weekly</li>
+        <li>Fork it and adapt to your own voice</li>
+        <li>Tag me on LinkedIn — I'd love to see it</li>
+      </ul>
+      <div class="byline">AI girl Anastasia · AI in Business Analysis</div>
+      <div class="slide-num">07 / 07</div>
+    </div>
+  </div>
+
+</div><!-- /slide-viewport -->
+
+<!-- Navigation (browser only) -->
+<div class="nav">
+  <button onclick="prevSlide()">←</button>
+  <span class="counter" id="counter">1 / 7</span>
+  <button onclick="nextSlide()">→</button>
+</div>
+
+<script>
+  let current = 0;
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+
+  function show(n) {
+    slides[current].classList.remove('active');
+    current = (n + total) % total;
+    slides[current].classList.add('active');
+    document.getElementById('counter').textContent = (current + 1) + ' / ' + total;
+  }
+
+  function nextSlide() { show(current + 1); }
+  function prevSlide() { show(current - 1); }
+
+  document.addEventListener('keydown', e => {
+    if (['ArrowRight', 'ArrowDown', ' '].includes(e.key)) { e.preventDefault(); nextSlide(); }
+    if (['ArrowLeft', 'ArrowUp'].includes(e.key)) { e.preventDefault(); prevSlide(); }
+  });
+
+  // Scale canvas to fit browser window
+  function scaleViewport() {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const scale = Math.min(vw / 1080, vh / 1350) * 0.95;
+    document.querySelector('.slide-viewport').style.transform = `scale(${scale})`;
+  }
+  window.addEventListener('resize', scaleViewport);
+  scaleViewport();
+</script>
+
+</body>
+</html>

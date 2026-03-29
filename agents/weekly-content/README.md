@@ -42,7 +42,7 @@ posts/
 ## Presentation design
 
 The HTML slides are built for screen sharing:
-- Dark background, high contrast
+- Sage green background (`#e8f5e2`), Montserrat font, teal accent (`#00c49a`)
 - Large fonts readable at any resolution
 - No external dependencies — works offline
 - One idea per slide — clean, focused
