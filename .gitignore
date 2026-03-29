@@ -1,0 +1,19 @@
+# Personal data — never push
+data/
+*.env
+.env*
+*.pdf
+screenshots/
+settings.txt
+linkedin_post_1.md
+
+# Telegram tokens and secrets
+telegram-notes/.last_update_id
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.swp

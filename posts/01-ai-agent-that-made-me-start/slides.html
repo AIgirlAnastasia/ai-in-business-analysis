@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Agent That Made Me Finally Start | AI girl Anastasia</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #0f0f1a;
+    color: #f0f0ff;
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  .slides { width: 100%; height: 100vh; position: relative; }
+
+  .slide {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    padding: 60px 80px;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 0; left: 0;
+  }
+
+  .slide.active { display: flex; }
+
+  /* Accent colors */
+  .accent { color: #a78bfa; }
+  .accent-2 { color: #34d399; }
+  .dim { color: #94a3b8; }
+
+  /* Typography */
+  h1 { font-size: 52px; font-weight: 700; line-height: 1.15; margin-bottom: 16px; }
+  h2 { font-size: 42px; font-weight: 700; line-height: 1.2; margin-bottom: 28px; }
+  h3 { font-size: 28px; font-weight: 600; color: #a78bfa; margin-bottom: 20px; }
+  p  { font-size: 26px; line-height: 1.6; color: #cbd5e1; margin-bottom: 16px; }
+
+  /* Lists */
+  ul { list-style: none; padding: 0; }
+  ul li {
+    font-size: 26px;
+    line-height: 1.6;
+    color: #cbd5e1;
+    margin-bottom: 16px;
+    padding-left: 32px;
+    position: relative;
+  }
+  ul li::before {
+    content: '▸';
+    color: #a78bfa;
+    position: absolute;
+    left: 0;
+  }
+
+  /* Code blocks */
+  pre {
+    background: #1e1e2e;
+    border: 1px solid #3b3b5c;
+    border-left: 4px solid #7c3aed;
+    border-radius: 8px;
+    padding: 24px 28px;
+    font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+    font-size: 22px;
+    color: #a78bfa;
+    margin: 24px 0;
+    line-height: 1.6;
+    white-space: pre;
+  }
+
+  /* Framework boxes */
+  .framework {
+    display: flex;
+    gap: 24px;
+    margin: 28px 0;
+  }
+  .framework-step {
+    flex: 1;
+    background: #1a1a2e;
+    border: 1px solid #3b3b5c;
+    border-top: 3px solid #7c3aed;
+    border-radius: 8px;
+    padding: 24px;
+  }
+  .framework-step .label {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #7c3aed;
+    margin-bottom: 10px;
+  }
+  .framework-step p {
+    font-size: 22px;
+    margin: 0;
+    color: #e2e8f0;
+  }
+
+  /* Before/After */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 28px 0;
+  }
+  .before, .after {
+    background: #1a1a2e;
+    border-radius: 8px;
+    padding: 28px;
+  }
+  .before { border-top: 3px solid #ef4444; }
+  .after  { border-top: 3px solid #34d399; }
+  .compare-label {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .before .compare-label { color: #ef4444; }
+  .after  .compare-label { color: #34d399; }
+  .compare p { font-size: 23px; color: #e2e8f0; margin: 0; }
+
+  /* Tag line */
+  .tag {
+    display: inline-block;
+    background: #1e1040;
+    color: #a78bfa;
+    border: 1px solid #4c1d95;
+    border-radius: 20px;
+    padding: 6px 18px;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  /* Slide number + nav */
+  .nav {
+    position: fixed;
+    bottom: 28px;
+    right: 40px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    z-index: 100;
+  }
+  .nav button {
+    background: #1e1e2e;
+    border: 1px solid #3b3b5c;
+    color: #a78bfa;
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .nav button:hover { background: #2a2a3e; }
+  .slide-counter { color: #64748b; font-size: 18px; }
+
+  /* Title slide specific */
+  .slide-title { background: #0f0f1a; }
+  .slide-title .subtitle {
+    font-size: 28px;
+    color: #64748b;
+    margin-top: 8px;
+  }
+  .slide-title .byline {
+    position: absolute;
+    bottom: 60px;
+    font-size: 20px;
+    color: #475569;
+  }
+  .slide-title .byline span { color: #7c3aed; }
+
+  /* Final slide */
+  .big-link {
+    font-size: 30px;
+    color: #a78bfa;
+    margin-top: 16px;
+    font-family: monospace;
+  }
+
+  /* Decorative line */
+  .rule {
+    width: 80px;
+    height: 4px;
+    background: #7c3aed;
+    border-radius: 2px;
+    margin-bottom: 32px;
+  }
+</style>
+</head>
+<body>
+
+<div class="slides">
+
+  <!-- SLIDE 1: Title -->
+  <div class="slide slide-title active">
+    <div class="tag">Episode 01</div>
+    <h1>The AI Agent That Made Me<br><span class="accent">Finally Start Writing</span></h1>
+    <p class="subtitle">How I built a personal AI agent with Claude Code<br>— and what it means for Business Analysts</p>
+    <div class="byline">AI girl <span>Anastasia</span> · March 2026</div>
+  </div>
+
+  <!-- SLIDE 2: The problem -->
+  <div class="slide">
+    <div class="rule"></div>
+    <h2>Sound familiar?</h2>
+    <ul>
+      <li>You spend hours preparing for meetings that could take 20 minutes</li>
+      <li>You review the same kind of document every week, manually</li>
+      <li>You know AI could help — but "that's for developers"</li>
+    </ul>
+    <p style="margin-top: 32px;">I said that last one for two years. Then I tried <span class="accent">Claude Code</span>.</p>
+  </div>
+
+  <!-- SLIDE 3: What is Claude Code -->
+  <div class="slide">
+    <div class="rule"></div>
+    <h2>What is Claude Code?</h2>
+    <p>A terminal-based AI agent that <span class="accent">reads your files, runs tasks, and saves results</span> — all in plain English.</p>
+    <p>You describe what you need. It does it.</p>
+    <pre>npm install -g @anthropic/claude-code
+cd your-project
+claude</pre>
+    <p class="dim">No coding required. If you can write a clear email, you can use this.</p>
+  </div>
+
+  <!-- SLIDE 4: The framework -->
+  <div class="slide">
+    <div class="rule"></div>
+    <h2>Every prompt follows one framework</h2>
+    <div class="framework">
+      <div class="framework-step">
+        <div class="label">Take</div>
+        <p>What data do you give it?<br><span class="dim">Files, folders, a URL, text</span></p>
+      </div>
+      <div class="framework-step">
+        <div class="label">Process</div>
+        <p>What should it do?<br><span class="dim">Find, classify, summarize, compare</span></p>
+      </div>
+      <div class="framework-step">
+        <div class="label">Store</div>
+        <p>Where does the result go?<br><span class="dim">A file, a report, a folder</span></p>
+      </div>
+    </div>
+    <p class="dim">This is the same thinking BAs already do. The agent just executes it.</p>
+  </div>
+
+  <!-- SLIDE 5: Real example -->
+  <div class="slide">
+    <div class="rule"></div>
+    <h2>My real example: call analysis</h2>
+    <pre>In the calls/ folder are 11 meeting transcripts.
+Read all of them. Find repeating problems.
+For each one: what it is, who raised it, impact.
+Save a structured report to report.md.</pre>
+    <p>That's the entire prompt. The agent reads 11 files, finds patterns across all of them, and produces a structured report.</p>
+    <p class="dim">I turned this into a reusable <span class="accent">Skill</span> — one command that does this every time: <code style="color:#a78bfa">/call-analysis</code></p>
+  </div>
+
+  <!-- SLIDE 6: Before / After -->
+  <div class="slide">
+    <div class="rule"></div>
+    <h2>The actual difference</h2>
+    <div class="compare">
+      <div class="before">
+        <div class="compare-label">Before</div>
+        <p>Read 11 transcripts manually, take notes, look for patterns, format a report.<br><br><strong style="font-size:28px;color:#ef4444">~3 hours</strong></p>
+      </div>
+      <div class="after">
+        <div class="compare-label">After</div>
+        <p>Type <code style="color:#34d399">/call-analysis</code> in the terminal. Review the result.<br><br><strong style="font-size:28px;color:#34d399">~8 minutes</strong></p>
+      </div>
+    </div>
+    <p class="dim">The thinking is still mine. The reading and formatting is the agent's.</p>
+  </div>
+
+  <!-- SLIDE 7: How to start -->
+  <div class="slide">
+    <div class="rule"></div>
+    <h2>3 steps to try this today</h2>
+    <ul>
+      <li>Install Claude Code: <code style="color:#a78bfa">npm install -g @anthropic/claude-code</code></li>
+      <li>Copy a skill from the GitHub repo into your project's <code style="color:#a78bfa">.claude/skills/</code> folder</li>
+      <li>Run it: type <code style="color:#a78bfa">/call-analysis</code> (or any skill name) and press Enter</li>
+    </ul>
+    <p style="margin-top: 28px;">Full setup guide → <span class="accent">github.com/AIgirlAnastasia/ai-in-business-analysis</span></p>
+  </div>
+
+  <!-- SLIDE 8: Connect -->
+  <div class="slide">
+    <div class="rule"></div>
+    <h2>Try it yourself</h2>
+    <p>All skills from this video are free to use and copy:</p>
+    <div class="big-link">github.com/AIgirlAnastasia/ai-in-business-analysis</div>
+    <ul style="margin-top: 36px;">
+      <li>⭐ Star the repo to follow weekly updates</li>
+      <li>Fork it and adapt the skills to your own work</li>
+      <li>Share what you built — tag me on LinkedIn</li>
+    </ul>
+    <p style="margin-top: 32px; color: #475569;">Next week: How I use a Telegram bot to capture ideas on the go — and sort them automatically.</p>
+  </div>
+
+</div>
+
+<!-- Navigation -->
+<div class="nav">
+  <button onclick="prevSlide()">←</button>
+  <span class="slide-counter" id="counter">1 / 8</span>
+  <button onclick="nextSlide()">→</button>
+</div>
+
+<script>
+  let current = 0;
+  const slides = document.querySelectorAll('.slide');
+
+  function show(n) {
+    slides[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    document.getElementById('counter').textContent = (current + 1) + ' / ' + slides.length;
+  }
+
+  function nextSlide() { show(current + 1); }
+  function prevSlide() { show(current - 1); }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') nextSlide();
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp') prevSlide();
+  });
+</script>
+
+</body>
+</html>
