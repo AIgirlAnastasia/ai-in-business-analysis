@@ -4,193 +4,388 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The AI Agent That Made Me Finally Start | AI girl Anastasia</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --bg:       #e8f5e2;
+    --text:     #1a1a1a;
+    --green:    #00c49a;
+    --pink:     #f0fdf7;
+    --cyan:     #ffffff;
+    --border:   #1a1a1a;
+    --radius:   20px;
+    --radius-pill: 100px;
+  }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background: #0f0f1a;
-    color: #f0f0ff;
+    font-family: 'Montserrat', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
     overflow: hidden;
     height: 100vh;
+    width: 100vw;
   }
 
+  /* ── Slide shell ── */
   .slides { width: 100%; height: 100vh; position: relative; }
 
   .slide {
     display: none;
     width: 100%;
     height: 100vh;
-    padding: 60px 80px;
-    flex-direction: column;
-    justify-content: center;
     position: absolute;
-    top: 0; left: 0;
+    inset: 0;
+    background: var(--bg);
   }
-
   .slide.active { display: flex; }
 
-  /* Accent colors */
-  .accent { color: #a78bfa; }
-  .accent-2 { color: #34d399; }
-  .dim { color: #94a3b8; }
-
-  /* Typography */
-  h1 { font-size: 52px; font-weight: 700; line-height: 1.15; margin-bottom: 16px; }
-  h2 { font-size: 42px; font-weight: 700; line-height: 1.2; margin-bottom: 28px; }
-  h3 { font-size: 28px; font-weight: 600; color: #a78bfa; margin-bottom: 20px; }
-  p  { font-size: 26px; line-height: 1.6; color: #cbd5e1; margin-bottom: 16px; }
-
-  /* Lists */
-  ul { list-style: none; padding: 0; }
-  ul li {
-    font-size: 26px;
-    line-height: 1.6;
-    color: #cbd5e1;
-    margin-bottom: 16px;
-    padding-left: 32px;
+  /* ── Layout helpers ── */
+  .slide-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 80px;
     position: relative;
   }
-  ul li::before {
-    content: '▸';
-    color: #a78bfa;
-    position: absolute;
-    left: 0;
-  }
 
-  /* Code blocks */
-  pre {
-    background: #1e1e2e;
-    border: 1px solid #3b3b5c;
-    border-left: 4px solid #7c3aed;
-    border-radius: 8px;
-    padding: 24px 28px;
-    font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
-    font-size: 22px;
-    color: #a78bfa;
-    margin: 24px 0;
-    line-height: 1.6;
-    white-space: pre;
+  /* Split layout (title slide) */
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100%;
   }
-
-  /* Framework boxes */
-  .framework {
+  .split-left {
     display: flex;
-    gap: 24px;
-    margin: 28px 0;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 60px 60px 80px;
+    border-right: 1.5px solid var(--border);
   }
-  .framework-step {
-    flex: 1;
-    background: #1a1a2e;
-    border: 1px solid #3b3b5c;
-    border-top: 3px solid #7c3aed;
-    border-radius: 8px;
-    padding: 24px;
+  .split-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 60px 60px 60px;
+    background: #00c49a;
   }
-  .framework-step .label {
-    font-size: 14px;
+
+  /* ── Accent pill ── */
+  .pill {
+    display: inline-block;
+    height: 10px;
+    width: 60px;
+    background: var(--green);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-pill);
+    margin-bottom: 20px;
+  }
+  .pill.pink  { background: var(--pink); }
+  .pill.cyan  { background: var(--cyan); }
+
+  /* ── Typography ── */
+  .label {
+    font-size: 12px;
     font-weight: 700;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #7c3aed;
+    color: var(--text);
+    opacity: 0.5;
+    margin-bottom: 14px;
+  }
+
+  h1 {
+    font-size: 52px;
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  h2 {
+    font-size: 44px;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    color: var(--text);
+    margin-bottom: 28px;
+  }
+  h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
     margin-bottom: 10px;
   }
-  .framework-step p {
-    font-size: 22px;
-    margin: 0;
-    color: #e2e8f0;
+  p {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.65;
+    color: var(--text);
+    margin-bottom: 14px;
+    max-width: 640px;
+  }
+  .large-p {
+    font-size: 24px;
+    line-height: 1.6;
+    font-weight: 500;
+  }
+  .muted { opacity: 0.55; }
+
+  /* ── Highlight span ── */
+  .hl-green {
+    background: #00c49a;
+    color: #fff;
+    padding: 1px 10px;
+    border-radius: 6px;
+  }
+  .hl-pink {
+    background: #c8f0e0;
+    padding: 1px 10px;
+    border-radius: 6px;
   }
 
-  /* Before/After */
+  /* ── Cards ── */
+  .card {
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 28px;
+    background: var(--bg);
+  }
+  .card.green { background: var(--green); }
+  .card.pink  { background: var(--pink); }
+  .card.cyan  { background: var(--cyan); }
+
+  /* ── Lists ── */
+  ul { list-style: none; padding: 0; }
+  ul li {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 16px;
+    padding-left: 24px;
+    position: relative;
+    max-width: 660px;
+  }
+  ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+  }
+
+  /* ── Framework grid ── */
+  .framework {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .fw-card {
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px 22px;
+  }
+  .fw-card:nth-child(1) { background: #c8f0e0; }
+  .fw-card:nth-child(2) { background: #d4f5ea; }
+  .fw-card:nth-child(3) { background: #edfff7; }
+  .fw-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    opacity: 0.6;
+  }
+  .fw-card h3 { font-size: 20px; margin-bottom: 6px; }
+  .fw-card p  { font-size: 16px; margin: 0; opacity: 0.7; }
+
+  /* ── Code block ── */
+  pre {
+    background: var(--text);
+    color: var(--bg);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+    font-size: 18px;
+    line-height: 1.7;
+    margin: 20px 0;
+    max-width: 680px;
+  }
+  code {
+    background: var(--text);
+    color: var(--bg);
+    font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+    font-size: 18px;
+    padding: 2px 10px;
+    border-radius: 6px;
+  }
+
+  /* ── Compare boxes ── */
   .compare {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    margin: 28px 0;
+    gap: 20px;
+    margin: 20px 0;
+    max-width: 760px;
   }
-  .before, .after {
-    background: #1a1a2e;
-    border-radius: 8px;
-    padding: 28px;
+  .compare-box {
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 28px;
   }
-  .before { border-top: 3px solid #ef4444; }
-  .after  { border-top: 3px solid #34d399; }
+  .compare-box.before { background: #fde8e8; }
+  .compare-box.after  { background: #c8f0e0; }
   .compare-label {
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 2px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
     text-transform: uppercase;
     margin-bottom: 12px;
   }
-  .before .compare-label { color: #ef4444; }
-  .after  .compare-label { color: #34d399; }
-  .compare p { font-size: 23px; color: #e2e8f0; margin: 0; }
+  .compare-box.before .compare-label { color: #c0392b; }
+  .compare-box.after  .compare-label { color: #27ae60; }
+  .compare-box p { font-size: 19px; margin-bottom: 0; max-width: unset; }
+  .big-num {
+    font-size: 48px;
+    font-weight: 900;
+    letter-spacing: -2px;
+    margin-top: 16px;
+    line-height: 1;
+  }
+  .before .big-num { color: #c0392b; }
+  .after  .big-num { color: #27ae60; }
 
-  /* Tag line */
-  .tag {
-    display: inline-block;
-    background: #1e1040;
-    color: #a78bfa;
-    border: 1px solid #4c1d95;
-    border-radius: 20px;
-    padding: 6px 18px;
-    font-size: 18px;
+  /* ── Steps list ── */
+  .steps { list-style: none; counter-reset: s; padding: 0; }
+  .steps li {
+    counter-increment: s;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--text);
     margin-bottom: 20px;
+    padding-left: 52px;
+    position: relative;
+    max-width: 700px;
+  }
+  .steps li::before {
+    content: counter(s);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 34px;
+    height: 34px;
+    background: var(--text);
+    color: var(--bg);
+    border-radius: 50%;
+    font-size: 15px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  /* Slide number + nav */
+  /* ── Button ── */
+  .btn {
+    display: inline-block;
+    background: var(--text);
+    color: var(--bg);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 28px;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid var(--border);
+    margin-top: 8px;
+    cursor: default;
+    letter-spacing: 0.3px;
+  }
+
+  /* ── Big link ── */
+  .big-link {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    border-bottom: 2.5px solid var(--text);
+    display: inline-block;
+    padding-bottom: 3px;
+    margin-top: 18px;
+    font-family: monospace;
+    letter-spacing: -0.3px;
+  }
+
+  /* ── Slide number ── */
+  .slide-num {
+    position: absolute;
+    bottom: 32px;
+    right: 80px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    opacity: 0.35;
+    letter-spacing: 1px;
+  }
+
+  /* ── Byline ── */
+  .byline {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    opacity: 0.5;
+    margin-top: 32px;
+  }
+
+  /* ── Right-column big stat (title slide) ── */
+  .stat-block { margin-bottom: 32px; }
+  .stat-block .stat-num {
+    font-size: 64px;
+    font-weight: 900;
+    letter-spacing: -3px;
+    line-height: 1;
+    color: var(--text);
+  }
+  .stat-block .stat-label {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+    opacity: 0.6;
+    margin-top: 4px;
+  }
+
+  /* ── Nav ── */
   .nav {
     position: fixed;
-    bottom: 28px;
+    bottom: 24px;
     right: 40px;
     display: flex;
     align-items: center;
-    gap: 16px;
-    z-index: 100;
+    gap: 10px;
+    z-index: 200;
   }
   .nav button {
-    background: #1e1e2e;
-    border: 1px solid #3b3b5c;
-    color: #a78bfa;
-    padding: 10px 22px;
-    border-radius: 6px;
-    font-size: 18px;
+    background: var(--text);
+    border: none;
+    color: var(--bg);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    font-size: 16px;
     cursor: pointer;
-    transition: background 0.2s;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    transition: opacity 0.15s;
   }
-  .nav button:hover { background: #2a2a3e; }
-  .slide-counter { color: #64748b; font-size: 18px; }
-
-  /* Title slide specific */
-  .slide-title { background: #0f0f1a; }
-  .slide-title .subtitle {
-    font-size: 28px;
-    color: #64748b;
-    margin-top: 8px;
-  }
-  .slide-title .byline {
-    position: absolute;
-    bottom: 60px;
-    font-size: 20px;
-    color: #475569;
-  }
-  .slide-title .byline span { color: #7c3aed; }
-
-  /* Final slide */
-  .big-link {
-    font-size: 30px;
-    color: #a78bfa;
-    margin-top: 16px;
-    font-family: monospace;
-  }
-
-  /* Decorative line */
-  .rule {
-    width: 80px;
-    height: 4px;
-    background: #7c3aed;
-    border-radius: 2px;
-    margin-bottom: 32px;
+  .nav button:hover { opacity: 0.7; }
+  .counter {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    opacity: 0.4;
+    letter-spacing: 1px;
   }
 </style>
 </head>
@@ -198,112 +393,169 @@
 
 <div class="slides">
 
-  <!-- SLIDE 1: Title -->
-  <div class="slide slide-title active">
-    <div class="tag">Episode 01</div>
-    <h1>The AI Agent That Made Me<br><span class="accent">Finally Start Writing</span></h1>
-    <p class="subtitle">How I built a personal AI agent with Claude Code<br>— and what it means for Business Analysts</p>
-    <div class="byline">AI girl <span>Anastasia</span> · March 2026</div>
+  <!-- SLIDE 1 · Title (split layout) -->
+  <div class="slide active">
+    <div class="split">
+      <div class="split-left">
+        <div class="label">Episode 01 · March 2026</div>
+        <h1>The AI Agent That Made Me Finally Start Writing.</h1>
+        <p>How I built a personal AI agent with Claude Code — and what it means for Business Analysts.</p>
+        <span class="btn">AI girl Anastasia</span>
+      </div>
+      <div class="split-right">
+        <div class="stat-block">
+          <div class="stat-num">11</div>
+          <div class="stat-label">meeting transcripts analysed</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num">8 min</div>
+          <div class="stat-label">instead of 3 hours</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num">0</div>
+          <div class="stat-label">lines of code written</div>
+        </div>
+        <div class="byline">AI in Business Analysis · weekly</div>
+      </div>
+    </div>
+    <div class="slide-num">01 / 08</div>
   </div>
 
-  <!-- SLIDE 2: The problem -->
+  <!-- SLIDE 2 · The problem -->
   <div class="slide">
-    <div class="rule"></div>
-    <h2>Sound familiar?</h2>
-    <ul>
-      <li>You spend hours preparing for meetings that could take 20 minutes</li>
-      <li>You review the same kind of document every week, manually</li>
-      <li>You know AI could help — but "that's for developers"</li>
-    </ul>
-    <p style="margin-top: 32px;">I said that last one for two years. Then I tried <span class="accent">Claude Code</span>.</p>
+    <div class="slide-inner">
+      <div class="pill pink"></div>
+      <div class="label">The problem</div>
+      <h2>Sound familiar?</h2>
+      <ul>
+        <li>You review the same kind of meeting notes every week — manually</li>
+        <li>Preparing a status update takes longer than the actual work</li>
+        <li>You think AI could help but <span class="hl-pink">"that's for developers"</span></li>
+      </ul>
+      <p style="margin-top: 28px;" class="muted">I said that last one for two years. Then I tried Claude Code.</p>
+      <div class="slide-num">02 / 08</div>
+    </div>
   </div>
 
-  <!-- SLIDE 3: What is Claude Code -->
+  <!-- SLIDE 3 · What is Claude Code -->
   <div class="slide">
-    <div class="rule"></div>
-    <h2>What is Claude Code?</h2>
-    <p>A terminal-based AI agent that <span class="accent">reads your files, runs tasks, and saves results</span> — all in plain English.</p>
-    <p>You describe what you need. It does it.</p>
-    <pre>npm install -g @anthropic/claude-code
+    <div class="slide-inner">
+      <div class="pill cyan"></div>
+      <div class="label">The tool</div>
+      <h2>What is <span class="hl-green">Claude Code?</span></h2>
+      <p class="large-p">A terminal-based AI agent that reads your files, runs tasks, and saves results — in plain English.</p>
+      <pre>npm install -g @anthropic/claude-code
 cd your-project
 claude</pre>
-    <p class="dim">No coding required. If you can write a clear email, you can use this.</p>
-  </div>
-
-  <!-- SLIDE 4: The framework -->
-  <div class="slide">
-    <div class="rule"></div>
-    <h2>Every prompt follows one framework</h2>
-    <div class="framework">
-      <div class="framework-step">
-        <div class="label">Take</div>
-        <p>What data do you give it?<br><span class="dim">Files, folders, a URL, text</span></p>
-      </div>
-      <div class="framework-step">
-        <div class="label">Process</div>
-        <p>What should it do?<br><span class="dim">Find, classify, summarize, compare</span></p>
-      </div>
-      <div class="framework-step">
-        <div class="label">Store</div>
-        <p>Where does the result go?<br><span class="dim">A file, a report, a folder</span></p>
-      </div>
+      <p class="muted">No coding required. If you can write a clear email, you can use this.</p>
+      <div class="slide-num">03 / 08</div>
     </div>
-    <p class="dim">This is the same thinking BAs already do. The agent just executes it.</p>
   </div>
 
-  <!-- SLIDE 5: Real example -->
+  <!-- SLIDE 4 · Framework -->
   <div class="slide">
-    <div class="rule"></div>
-    <h2>My real example: call analysis</h2>
-    <pre>In the calls/ folder are 11 meeting transcripts.
+    <div class="slide-inner">
+      <div class="pill"></div>
+      <div class="label">The framework</div>
+      <h2>Every prompt has<br>the same structure.</h2>
+      <div class="framework">
+        <div class="fw-card">
+          <div class="fw-label">Take</div>
+          <h3>What data?</h3>
+          <p>Files, folders, text, a URL</p>
+        </div>
+        <div class="fw-card">
+          <div class="fw-label">Process</div>
+          <h3>What to do?</h3>
+          <p>Find, classify, summarise, compare</p>
+        </div>
+        <div class="fw-card">
+          <div class="fw-label">Store</div>
+          <h3>Where to save?</h3>
+          <p>A file, a report, a folder</p>
+        </div>
+      </div>
+      <p class="muted">This is the same thinking BAs already do. The agent just executes it.</p>
+      <div class="slide-num">04 / 08</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5 · Real example -->
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="pill pink"></div>
+      <div class="label">Real example</div>
+      <h2>My call analysis prompt.</h2>
+      <pre>In the calls/ folder are 11 meeting transcripts.
 Read all of them. Find repeating problems.
-For each one: what it is, who raised it, impact.
+For each: what it is, who raised it, impact.
 Save a structured report to report.md.</pre>
-    <p>That's the entire prompt. The agent reads 11 files, finds patterns across all of them, and produces a structured report.</p>
-    <p class="dim">I turned this into a reusable <span class="accent">Skill</span> — one command that does this every time: <code style="color:#a78bfa">/call-analysis</code></p>
+      <p>I turned this into a reusable Skill — one command, every time:</p>
+      <code>/call-analysis</code>
+      <div class="slide-num">05 / 08</div>
+    </div>
   </div>
 
-  <!-- SLIDE 6: Before / After -->
+  <!-- SLIDE 6 · Before / After -->
   <div class="slide">
-    <div class="rule"></div>
-    <h2>The actual difference</h2>
-    <div class="compare">
-      <div class="before">
-        <div class="compare-label">Before</div>
-        <p>Read 11 transcripts manually, take notes, look for patterns, format a report.<br><br><strong style="font-size:28px;color:#ef4444">~3 hours</strong></p>
+    <div class="slide-inner">
+      <div class="pill"></div>
+      <div class="label">The result</div>
+      <h2>The actual difference.</h2>
+      <div class="compare">
+        <div class="compare-box before">
+          <div class="compare-label">Before</div>
+          <p>Read 11 transcripts manually, take notes, find patterns, format a report.</p>
+          <div class="big-num">~3 hrs</div>
+        </div>
+        <div class="compare-box after">
+          <div class="compare-label">After</div>
+          <p>Type <code>/call-analysis</code> in the terminal. Review the output.</p>
+          <div class="big-num">~8 min</div>
+        </div>
       </div>
-      <div class="after">
-        <div class="compare-label">After</div>
-        <p>Type <code style="color:#34d399">/call-analysis</code> in the terminal. Review the result.<br><br><strong style="font-size:28px;color:#34d399">~8 minutes</strong></p>
+      <p class="muted">The thinking is still mine. The reading and formatting is the agent's.</p>
+      <div class="slide-num">06 / 08</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7 · How to start -->
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="pill cyan"></div>
+      <div class="label">Get started today</div>
+      <h2>3 steps to try this.</h2>
+      <ol class="steps">
+        <li>Install Claude Code: <code>npm install -g @anthropic/claude-code</code></li>
+        <li>Copy any skill folder from GitHub into <code>.claude/skills/</code> in your project</li>
+        <li>Restart Claude Code, type <code>/call-analysis</code> and press Enter</li>
+      </ol>
+      <div class="slide-num">07 / 08</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8 · Connect -->
+  <div class="slide">
+    <div class="split">
+      <div class="split-left">
+        <div class="pill"></div>
+        <div class="label">Try it yourself</div>
+        <h2>All skills are free to copy and use.</h2>
+        <div class="big-link">github.com/AIgirlAnastasia/<br>ai-in-business-analysis</div>
+        <div class="byline">New skill every week · AI girl Anastasia</div>
+      </div>
+      <div class="split-right" style="background: #d4f5ea;">
+        <div class="label">Coming next week</div>
+        <h3 style="font-size:28px; margin-bottom: 20px;">The Telegram Notes Agent</h3>
+        <p>Send yourself voice memos during the day. The agent transcribes them, classifies into Ideas and Tasks, and saves everything automatically.</p>
+        <ul style="margin-top: 16px;">
+          <li>No manual note-taking</li>
+          <li>Works with voice and text</li>
+          <li>Zero duplicates across runs</li>
+        </ul>
       </div>
     </div>
-    <p class="dim">The thinking is still mine. The reading and formatting is the agent's.</p>
-  </div>
-
-  <!-- SLIDE 7: How to start -->
-  <div class="slide">
-    <div class="rule"></div>
-    <h2>3 steps to try this today</h2>
-    <ul>
-      <li>Install Claude Code: <code style="color:#a78bfa">npm install -g @anthropic/claude-code</code></li>
-      <li>Copy a skill from the GitHub repo into your project's <code style="color:#a78bfa">.claude/skills/</code> folder</li>
-      <li>Run it: type <code style="color:#a78bfa">/call-analysis</code> (or any skill name) and press Enter</li>
-    </ul>
-    <p style="margin-top: 28px;">Full setup guide → <span class="accent">github.com/AIgirlAnastasia/ai-in-business-analysis</span></p>
-  </div>
-
-  <!-- SLIDE 8: Connect -->
-  <div class="slide">
-    <div class="rule"></div>
-    <h2>Try it yourself</h2>
-    <p>All skills from this video are free to use and copy:</p>
-    <div class="big-link">github.com/AIgirlAnastasia/ai-in-business-analysis</div>
-    <ul style="margin-top: 36px;">
-      <li>⭐ Star the repo to follow weekly updates</li>
-      <li>Fork it and adapt the skills to your own work</li>
-      <li>Share what you built — tag me on LinkedIn</li>
-    </ul>
-    <p style="margin-top: 32px; color: #475569;">Next week: How I use a Telegram bot to capture ideas on the go — and sort them automatically.</p>
+    <div class="slide-num">08 / 08</div>
   </div>
 
 </div>
@@ -311,27 +563,28 @@ Save a structured report to report.md.</pre>
 <!-- Navigation -->
 <div class="nav">
   <button onclick="prevSlide()">←</button>
-  <span class="slide-counter" id="counter">1 / 8</span>
+  <span class="counter" id="counter">1 / 8</span>
   <button onclick="nextSlide()">→</button>
 </div>
 
 <script>
   let current = 0;
   const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
 
   function show(n) {
     slides[current].classList.remove('active');
-    current = (n + slides.length) % slides.length;
+    current = (n + total) % total;
     slides[current].classList.add('active');
-    document.getElementById('counter').textContent = (current + 1) + ' / ' + slides.length;
+    document.getElementById('counter').textContent = (current + 1) + ' / ' + total;
   }
 
   function nextSlide() { show(current + 1); }
   function prevSlide() { show(current - 1); }
 
   document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') nextSlide();
-    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp') prevSlide();
+    if (['ArrowRight', 'ArrowDown', ' '].includes(e.key)) { e.preventDefault(); nextSlide(); }
+    if (['ArrowLeft', 'ArrowUp'].includes(e.key)) { e.preventDefault(); prevSlide(); }
   });
 </script>
 
