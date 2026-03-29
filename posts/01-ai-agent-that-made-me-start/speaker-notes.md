@@ -48,6 +48,6 @@
 
 ## Slide 8 — Connect
 
-"Everything I showed today — the skills, the example outputs, the setup instructions — it's all in this GitHub repo, free to use. Star it to get notified when I add new skills each week. Next week I'll show you the Telegram notes agent — how I send myself voice memos during the day and the agent sorts them into ideas and tasks automatically. See you there."
+"Everything I showed today — the skills, the example outputs, the setup instructions — it's all in this GitHub repo, free to use. Fork it, adapt it to your own work, and let me know what you build."
 
 ---

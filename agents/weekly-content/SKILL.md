@@ -77,7 +77,7 @@ Slide structure:
 5. **Live example** — a real prompt or command from Anastasia's work (code block)
 6. **The result** — before vs after, or what the output looks like
 7. **How to set it up** — 3-step quick start the viewer can do today
-8. **Connect** — GitHub link, LinkedIn, YouTube channel name
+8. **Connect** — GitHub link, LinkedIn, YouTube channel name. No "next week" teasers — keep it open.
 
 ---
 
