@@ -114,7 +114,7 @@ For each slide, write 3–5 sentences Anastasia can say out loud while showing t
 
 Save to: `posts/[number]-[topic-slug]/carousel.html`
 
-A portrait-format (1080×1350px) HTML carousel for LinkedIn. Open in Chrome → Print → Save as PDF → upload to LinkedIn as a document post (becomes swipeable carousel).
+A square-format (1080×1080px) HTML carousel for LinkedIn. Open in Chrome → Print → Save as PDF → upload to LinkedIn as a document post (becomes swipeable carousel).
 
 **IMPORTANT — Design system:**
 Same design tokens as the YouTube slides (sage green `#e8f5e2`, Montserrat, teal `#00c49a`, `1.5px solid #1a1a1a` borders, 28px border-radius). Reference `posts/01-ai-agent-that-made-me-start/carousel.html` for the full CSS — copy it exactly.
