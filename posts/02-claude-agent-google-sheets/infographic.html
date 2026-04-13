@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Module Pattern — AI girl Anastasia</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box;
+      -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  :root {
+    --bg:        #1C1917;
+    --bg2:       #231F1C;
+    --bg3:       #2A2520;
+    --border:    rgba(255,255,255,0.1);
+    --text:      #F5F0EB;
+    --muted:     rgba(245,240,235,0.5);
+    --orange:    #D97706;
+    --orange-lt: rgba(217,119,6,0.15);
+    --orange-md: rgba(217,119,6,0.25);
+    --red-lt:    rgba(220,38,38,0.15);
+    --green-lt:  rgba(16,185,129,0.15);
+    --green:     #10B981;
+    --red:       #EF4444;
+  }
+
+  body {
+    font-family: 'Montserrat', Arial, sans-serif;
+    background: #0D0B09;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 24px 0;
+  }
+
+  .canvas {
+    width: 1080px;
+    height: 1350px;
+    background: var(--bg);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transform-origin: top center;
+    overflow: hidden;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    padding: 44px 64px 36px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+    position: relative;
+  }
+  /* subtle glow behind title */
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; left: 40px;
+    width: 300px; height: 200px;
+    background: radial-gradient(ellipse, rgba(217,119,6,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 16px;
+  }
+  .header h1 {
+    font-size: 44px;
+    font-weight: 900;
+    line-height: 1.12;
+    letter-spacing: -1.5px;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  .header h1 em {
+    font-style: normal;
+    color: var(--orange);
+  }
+  .header-sub {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ── VS ROW ── */
+  .vs-row {
+    display: grid;
+    grid-template-columns: 1fr 52px 1fr;
+    align-items: center;
+    gap: 0;
+    padding: 24px 64px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .vs-box {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 22px;
+  }
+  .vs-box.bad  { background: var(--red-lt);   border-color: rgba(239,68,68,0.25); }
+  .vs-box.good { background: var(--green-lt); border-color: rgba(16,185,129,0.25); }
+  .vs-badge {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .vs-box.bad  .vs-badge { color: var(--red); }
+  .vs-box.good .vs-badge { color: var(--green); }
+  .vs-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.35;
+    margin-bottom: 6px;
+  }
+  .vs-body {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .vs-circle {
+    width: 44px; height: 44px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--muted);
+    margin: 0 auto;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── SECTION LABEL ── */
+  .section-head {
+    padding: 24px 64px 4px;
+    flex-shrink: 0;
+  }
+  .section-eyebrow {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 6px;
+  }
+  .section-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.5px;
+    line-height: 1.25;
+  }
+
+  /* ── STEPS ── */
+  .steps-flow {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 64px 0;
+    gap: 0;
+    flex: 1;
+  }
+
+  .step-row {
+    display: grid;
+    grid-template-columns: 56px 1fr 200px;
+    gap: 20px;
+    align-items: start;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .step-row:last-child { border-bottom: none; }
+
+  .step-num {
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 900;
+    flex-shrink: 0;
+    margin-top: 2px;
+    border: 1px solid var(--border);
+  }
+  .step-row:nth-child(1) .step-num { background: var(--orange-md); color: var(--orange); border-color: rgba(217,119,6,0.4); }
+  .step-row:nth-child(2) .step-num { background: var(--bg3); color: var(--text); }
+  .step-row:nth-child(3) .step-num { background: var(--bg3); color: var(--text); }
+  .step-row:nth-child(4) .step-num { background: var(--orange-md); color: var(--orange); border-color: rgba(217,119,6,0.4); }
+
+  .step-body { padding: 4px 0 8px; }
+  .step-verb {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 4px;
+  }
+  .step-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 5px;
+    line-height: 1.2;
+  }
+  .step-desc {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 420px;
+  }
+
+  .step-tags {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding-top: 4px;
+  }
+  .tag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    text-align: center;
+    white-space: nowrap;
+  }
+  .tag.tool  { background: var(--orange-lt); border-color: rgba(217,119,6,0.3); color: var(--orange); }
+  .tag.you   { background: var(--bg3); }
+  .tag.exact { background: rgba(16,185,129,0.15); border-color: rgba(16,185,129,0.3); color: var(--green); }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--border);
+    background: var(--bg2);
+    flex-shrink: 0;
+  }
+  .stat-item {
+    padding: 20px 24px;
+    border-right: 1px solid var(--border);
+    text-align: center;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-n {
+    font-size: 34px;
+    font-weight: 900;
+    color: var(--orange);
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+  .stat-l {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--bg3);
+    border-top: 1px solid var(--border);
+    padding: 14px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .footer-brand { font-size: 13px; font-weight: 700; color: var(--text); letter-spacing: 0.3px; }
+  .footer-link  { font-size: 11px; font-weight: 500; color: var(--muted); font-family: monospace; letter-spacing: 0.5px; }
+
+  /* ── Print ── */
+  @page { size: 1080px 1350px; margin: 0; }
+  @media print {
+    body { background: transparent; display: block; padding: 0; }
+    .canvas { transform: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="canvas" id="canvas">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-eyebrow">AI in Business Analysis · Episode 02 · April 2026</div>
+    <h1>Data Analysis<br>No Longer Requires<br><em>Coding.</em></h1>
+    <div class="header-sub">It requires knowing how to split the problem — between you, Claude, and a script.</div>
+  </div>
+
+  <!-- VS ROW -->
+  <div class="vs-row">
+    <div class="vs-box bad">
+      <div class="vs-badge">❌ Wrong</div>
+      <div class="vs-title">"What's the conversion rate in my 3,000-row sheet?"</div>
+      <div class="vs-body">LLM counts directly → confident, wrong number</div>
+    </div>
+    <div class="vs-circle">VS</div>
+    <div class="vs-box good">
+      <div class="vs-badge">✓ Right</div>
+      <div class="vs-title">"Write a script that calculates the conversion rate."</div>
+      <div class="vs-body">LLM writes code → code counts → exact answer every time</div>
+    </div>
+  </div>
+
+  <!-- SECTION HEAD -->
+  <div class="section-head">
+    <div class="section-eyebrow">The Module Pattern</div>
+    <div class="section-title">Code counts. LLM interprets. You ask the questions.</div>
+  </div>
+
+  <!-- STEPS -->
+  <div class="steps-flow">
+
+    <div class="step-row">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-verb">GET</div>
+        <div class="step-title">Connect your data source</div>
+        <div class="step-desc">Link Google Sheets via MCP. Claude reads the sheet directly — no copy-paste, no manual export.</div>
+      </div>
+      <div class="step-tags">
+        <span class="tag tool">Google Sheets MCP</span>
+        <span class="tag you">You: point to the sheet</span>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-verb">WRITE</div>
+        <div class="step-title">Ask Claude to write the script</div>
+        <div class="step-desc">Describe the question. Claude writes a formula into the sheet or a Python script — and inserts it directly.</div>
+      </div>
+      <div class="step-tags">
+        <span class="tag tool">Claude Agent</span>
+        <span class="tag you">You: ask the question</span>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-verb">RUN</div>
+        <div class="step-title">Execute — get exact numbers</div>
+        <div class="step-desc">Code runs, not the LLM. No hallucination possible. The formula calculates, the script outputs, the numbers are real.</div>
+      </div>
+      <div class="step-tags">
+        <span class="tag exact">Zero hallucination</span>
+        <span class="tag you">You: one command</span>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-verb">EXPLAIN</div>
+        <div class="step-title">Ask Claude what it means</div>
+        <div class="step-desc">Paste the output back. Claude spots the pattern, flags anomalies, suggests what to investigate next.</div>
+      </div>
+      <div class="step-tags">
+        <span class="tag tool">Claude Agent</span>
+        <span class="tag you">You: decide next step</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-n">3,295</div>
+      <div class="stat-l">rows analyzed<br>in this demo</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-n">5 min</div>
+      <div class="stat-l">vs 1 hour<br>manual in Excel</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-n">0</div>
+      <div class="stat-l">lines of code<br>written by hand</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-brand">AI girl Anastasia</div>
+    <div class="footer-link">github.com/AIgirlAnastasia/ai-in-business-analysis</div>
+  </div>
+
+</div>
+
+<script>
+  function scale() {
+    const c = document.getElementById('canvas');
+    const s = Math.min(window.innerWidth / 1080, (window.innerHeight - 48) / 1350);
+    c.style.transform = `scale(${s})`;
+    document.body.style.minHeight = (1350 * s + 48) + 'px';
+  }
+  scale();
+  window.addEventListener('resize', scale);
+</script>
+
+</body>
+</html>
